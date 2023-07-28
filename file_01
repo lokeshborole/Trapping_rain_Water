@@ -1,0 +1,42 @@
+class Solution {
+    public int trap(int[] arr) {
+        int count=0;
+        int left=0;
+        int right=arr.length-1;
+
+        int low=arr[left];
+        int high=arr[right];
+
+        while(left<right){
+            if(low==0){ 
+                left++; 
+                low=arr[left];
+            }
+            else if(high==0) {
+                right--;
+                high=arr[right];
+            }
+            else if(low<=high){
+                if(arr[left+1]>=low){
+                    left++;
+                    low=arr[left];
+                }
+                else{
+                    count+=low-arr[left+1];
+                    left++;
+                }
+            }
+            else if(low>high){
+                if(arr[right-1]>=high){
+                    right--;
+                    high=arr[right];
+                }
+                else{
+                    count+=high-arr[right-1];
+                    right--;
+                }
+            }
+        }
+        return count;
+    }
+}
